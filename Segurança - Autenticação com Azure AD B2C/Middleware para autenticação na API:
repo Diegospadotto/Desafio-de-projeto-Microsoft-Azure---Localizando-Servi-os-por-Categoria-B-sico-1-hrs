@@ -1,0 +1,8 @@
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapGet("/user", (HttpContext ctx) => 
+{
+    var user = ctx.User.Identity?.Name ?? "Desconhecido";
+    return Results.Ok($"Bem-vindo, {user}");
+}).RequireAuthorization();
