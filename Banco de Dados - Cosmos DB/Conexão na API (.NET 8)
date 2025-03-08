@@ -1,0 +1,3 @@
+var cosmosClient = new CosmosClient("your-connection-string");
+var database = cosmosClient.GetDatabase("AzureServicesDB");
+var container = database.GetContainer("Services");
