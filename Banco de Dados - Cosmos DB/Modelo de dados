@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "category": "Compute",
+  "services": [
+    { "name": "Virtual Machines", "price": "0.10/hour" },
+    { "name": "Azure Kubernetes Service", "price": "0.15/hour" }
+  ]
+}
