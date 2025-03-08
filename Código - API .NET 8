@@ -1,0 +1,28 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Azure.Cosmos;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+// Simulação de dados (substituir por Cosmos DB)
+var services = new Dictionary<string, List<string>>()
+{
+    { "Compute", new List<string> { "Virtual Machines", "Azure Kubernetes Service" } },
+    { "Storage", new List<string> { "Azure Blob Storage", "File Storage" } },
+    { "AI", new List<string> { "Azure OpenAI", "Cognitive Services" } }
+};
+
+// Endpoint para buscar serviços por categoria
+app.MapGet("/services/{category}", (string category) =>
+{
+    if (services.ContainsKey(category))
+        return Results.Ok(services[category]);
+
+    return Results.NotFound("Categoria não encontrada.");
+});
+
+app.Run();
