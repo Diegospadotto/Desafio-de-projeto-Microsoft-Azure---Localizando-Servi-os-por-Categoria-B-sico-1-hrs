@@ -1,0 +1,27 @@
+import { useState, useEffect } from "react";
+
+const AzureServices = ({ category }: { category: string }) => {
+  const [services, setServices] = useState<string[]>([]);
+
+  useEffect(() => {
+    fetch(`https://api.azurefinder.com/services/${category}`)
+      .then((res) => res.json())
+      .then((data) => setServices(data))
+      .catch(() => setServices([]));
+  }, [category]);
+
+  return (
+    <div>
+      <h2 className="text-xl font-bold">{category} Services</h2>
+      <ul className="list-disc pl-5">
+        {services.length > 0 ? (
+          services.map((service, index) => <li key={index}>{service}</li>)
+        ) : (
+          <p>Nenhum serviço encontrado.</p>
+        )}
+      </ul>
+    </div>
+  );
+};
+
+export default AzureServices;
